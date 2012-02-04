@@ -5,10 +5,6 @@ assert = require 'assert'
 async = require 'async'
 
 
-ENOENT = 2
-ENOTDIR = 20
-
-
 class Paths
   
   constructor: () ->
@@ -86,7 +82,7 @@ exports.StatWatcher = class StatWatcher extends events.EventEmitter
       if err
         
         # file deleted
-        if err.errno == ENOENT
+        if err.code is 'ENOENT'
           if last_mtime
             @emit 'fileDeleted', path
             delete @path_mtime[path]
@@ -139,7 +135,7 @@ _pathsIn = (path, paths, callback) ->
   fs.readdir path, (err, files) ->
     
     # Case: file
-    if err and err.errno == ENOTDIR
+    if err and err.code is 'ENOTDIR'
       paths.push path
       return callback()
     
