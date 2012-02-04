@@ -1,5 +1,5 @@
 {
-    "name": "watch-tree",
+    "name": "watch-tree-maintained",
     "version": "0.1.2",
 
     "description": "Yet another library for watching FS trees. Includes a JSON-on-stdout command-line tool and {filePreexisted,allPreexistingFilesReported} events.",
