@@ -1,7 +1,6 @@
 
 {exec} = require 'child_process'
-sys = require 'sys'
-
+util = try require 'util' catch e then require 'sys'
 
 exports.check_exec_options = check_exec_options = (cmd, options, callback) ->
   exec cmd, options, (e, stdout, stderr) ->
@@ -41,7 +40,7 @@ exports.EventBuffer = class EventBuffer
       @callback = callback
   
   expect: (t, args...) ->
-    sys.debug "Expecting #{args[0]}..."
+    util.debug "Expecting #{args[0]}..."
     @wait (event) ->
       for x, i in args[...-1]
         t.equal event[i], x
